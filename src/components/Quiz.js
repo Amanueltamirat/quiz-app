@@ -45,7 +45,7 @@ const [active, setActive] = useState('')
 
 
   return (
-    <div>
+    <div className='question-box'>
         <h1>{Questions[currentQuestion].question}</h1>
        <motion.div
         //   initial={{ opacity: 0 }}

@@ -13,11 +13,11 @@ const restartQuiz = () => {
 
 
   return (
-    <div>
-<h1>Quiz Finished</h1>
-<h1>
+    <div className='result-screen'>
+
+<h2>
         You Scored {score} / {Questions.length}
-      </h1>
+      </h2>
       <button className='next' onClick={restartQuiz}>Restart Quiz</button>
     </div>
   )

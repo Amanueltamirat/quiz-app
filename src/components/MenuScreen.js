@@ -11,15 +11,8 @@ const {quizState, setQuizeState, userName, setUserName } = useContext(QuestionsC
   };
   return (
     <div className='menu'>
-         {/* <label>Enter Your Name:</label>
-      <input
-        type="text"
-        placeholder="Ex. John Smith"
-        onChange={(event) => {
-          setUserName(event.target.value);
-        }}
-      /> */}
-      <h2>Start your quiz</h2>
+   
+      <h2> <span>Hello Mr.<strong>X</strong></span> Start your quiz</h2>
       <motion.button
       className='start-btn'
         onClick={() => {
