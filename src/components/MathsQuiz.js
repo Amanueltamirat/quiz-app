@@ -1,9 +1,9 @@
 import React, { useContext, useRef, useState } from 'react'
-import { Questions } from '../helpers/Questions'
+
 import { QuestionsContext } from '../helpers/Context'
 import {NavLink, useLocation} from 'react-router-dom'
 import {AnimatePresence, inView, motion} from 'framer-motion'
-
+import { MathsQuestions } from '../helpers/Questions'
 
 
 const animations = {
@@ -12,7 +12,7 @@ const animations = {
   exit: { opacity: 0, x: -100 },
 };
 
-function Quiz({isVisible}) {
+function MathsQuiz({isVisible}) {
 
 const [currentQuestion, setCurrentQuestion] = useState(0)
 const [chosenOption, setChosenOption] = useState('')
@@ -27,11 +27,11 @@ let missedQuestions = []
     
   }
   const nextQuestion = () => {
-    if (Questions[currentQuestion].asnwer == chosenOption) {
+    if (MathsQuestions[currentQuestion].asnwer == chosenOption) {
       setScore(score + 1);
     }
-    else if (Questions[currentQuestion].asnwer !== chosenOption){
-      missedQuestions.push(Questions[currentQuestion])
+    else if (MathsQuestions[currentQuestion].asnwer !== chosenOption){
+      missedQuestions.push(MathsQuestions[currentQuestion])
     }
     setCurrentQuestion(currentQuestion + 1);
     setActive('')
@@ -39,10 +39,10 @@ let missedQuestions = []
   };
 
   const finishQuiz = () => {
-    if (Questions[currentQuestion].asnwer == chosenOption) {
+    if (MathsQuestions[currentQuestion].asnwer == chosenOption) {
       setScore(score + 1);
     }
-    setQuizeState("it");
+    setQuizeState("mathematics");
     setCategory('finished')
 console.log(missedQuestions)
   };
@@ -51,7 +51,7 @@ console.log(missedQuestions)
 
   return (
     <div className='question-box'>
-        <h1>Q.{currentQuestion + 1}: {Questions[currentQuestion].question}</h1>
+        <h1>Q.{currentQuestion + 1}: {MathsQuestions[currentQuestion].question}</h1>
        <motion.div
          className='choose-option'>
         <AnimatePresence>
@@ -75,7 +75,7 @@ console.log(missedQuestions)
           }}
 
         >
-          A. {Questions[currentQuestion].A}
+          A. {MathsQuestions[currentQuestion].A}
         </motion.button>
         <motion.button
           id={'2'}
@@ -96,7 +96,7 @@ console.log(missedQuestions)
           }}
         //   className={`${isActive ? 'active':'not-active'}`}
         >
-          B. {Questions[currentQuestion].B}
+          B. {MathsQuestions[currentQuestion].B}
         </motion.button>
         <motion.button
         id={'3'}
@@ -115,7 +115,7 @@ console.log(missedQuestions)
             chooseOption("C");
           }}
         >
-          C. {Questions[currentQuestion].C}
+          C. {MathsQuestions[currentQuestion].C}
         </motion.button>
         <motion.button
         id={'4'}
@@ -134,12 +134,12 @@ console.log(missedQuestions)
             chooseOption("D");
           }}
         >
-         D. {Questions[currentQuestion].D}
+         D. {MathsQuestions[currentQuestion].D}
         </motion.button>
         </AnimatePresence>
        </motion.div>
        
-      {currentQuestion == Questions.length - 1 ? (
+      {currentQuestion == MathsQuestions.length - 1 ? (
         <button className=' next' onClick={()=>finishQuiz()} id="nextQuestion">
           Finish Quiz
         </button>
@@ -157,4 +157,4 @@ console.log(missedQuestions)
   )
 }
 
-export default Quiz
+export default MathsQuiz

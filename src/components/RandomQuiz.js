@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import { Questions } from '../helpers/Questions'
+import { RandomQuestions } from '../helpers/Questions'
 import { QuestionsContext } from '../helpers/Context'
 import {NavLink, useLocation} from 'react-router-dom'
 import {AnimatePresence, inView, motion} from 'framer-motion'
@@ -12,7 +12,7 @@ const animations = {
   exit: { opacity: 0, x: -100 },
 };
 
-function Quiz({isVisible}) {
+function RandomQuiz({isVisible}) {
 
 const [currentQuestion, setCurrentQuestion] = useState(0)
 const [chosenOption, setChosenOption] = useState('')
@@ -27,11 +27,11 @@ let missedQuestions = []
     
   }
   const nextQuestion = () => {
-    if (Questions[currentQuestion].asnwer == chosenOption) {
+    if (RandomQuestions[currentQuestion].asnwer == chosenOption) {
       setScore(score + 1);
     }
-    else if (Questions[currentQuestion].asnwer !== chosenOption){
-      missedQuestions.push(Questions[currentQuestion])
+    else if (RandomQuestions[currentQuestion].asnwer !== chosenOption){
+      missedQuestions.push(RandomQuestions[currentQuestion])
     }
     setCurrentQuestion(currentQuestion + 1);
     setActive('')
@@ -39,10 +39,10 @@ let missedQuestions = []
   };
 
   const finishQuiz = () => {
-    if (Questions[currentQuestion].asnwer == chosenOption) {
+    if (RandomQuestions[currentQuestion].asnwer == chosenOption) {
       setScore(score + 1);
     }
-    setQuizeState("it");
+    setQuizeState("random");
     setCategory('finished')
 console.log(missedQuestions)
   };
@@ -51,7 +51,7 @@ console.log(missedQuestions)
 
   return (
     <div className='question-box'>
-        <h1>Q.{currentQuestion + 1}: {Questions[currentQuestion].question}</h1>
+        <h1>Q.{currentQuestion + 1}: {RandomQuestions[currentQuestion].question}</h1>
        <motion.div
          className='choose-option'>
         <AnimatePresence>
@@ -75,7 +75,7 @@ console.log(missedQuestions)
           }}
 
         >
-          A. {Questions[currentQuestion].A}
+          A. {RandomQuestions[currentQuestion].A}
         </motion.button>
         <motion.button
           id={'2'}
@@ -96,7 +96,7 @@ console.log(missedQuestions)
           }}
         //   className={`${isActive ? 'active':'not-active'}`}
         >
-          B. {Questions[currentQuestion].B}
+          B. {RandomQuestions[currentQuestion].B}
         </motion.button>
         <motion.button
         id={'3'}
@@ -115,7 +115,7 @@ console.log(missedQuestions)
             chooseOption("C");
           }}
         >
-          C. {Questions[currentQuestion].C}
+          C. {RandomQuestions[currentQuestion].C}
         </motion.button>
         <motion.button
         id={'4'}
@@ -134,12 +134,12 @@ console.log(missedQuestions)
             chooseOption("D");
           }}
         >
-         D. {Questions[currentQuestion].D}
+         D. {RandomQuestions[currentQuestion].D}
         </motion.button>
         </AnimatePresence>
        </motion.div>
        
-      {currentQuestion == Questions.length - 1 ? (
+      {currentQuestion == RandomQuestions.length - 1 ? (
         <button className=' next' onClick={()=>finishQuiz()} id="nextQuestion">
           Finish Quiz
         </button>
@@ -157,4 +157,4 @@ console.log(missedQuestions)
   )
 }
 
-export default Quiz
+export default RandomQuiz
